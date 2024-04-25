@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cozy Home Decor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Cozy Home Decor</h1>
+      <nav>
+        <button onclick="showProducts('all')">All Products</button>
+        <button onclick="showProducts('furniture')">Furniture</button>
+        <button onclick="showProducts('decor')">Decor</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Featured Products</h2>
+      <section class="products" id="products">
+        </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Cozy Home Decor. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dummy product data (replace with your own data)
+    const products = [
+      {
+        id: 1,
+        name: "Modern Sofa",
+        type: "furniture",
+        description: "Sink into comfort with our plush modern sofa. Perfect for relaxing evenings.",
+        image: "images/sofa.jpg",
+        price: 799.99,
+      },
+      {
+        id: 2,
+        name: "Rustic Coffee Table",
+        type: "furniture",
+        description: "This beautiful coffee table adds a touch of rustic charm to your living room.",
+        image: "images/coffee-table.jpg",
+        price: 299.99,
+      },
+      {
+        id: 3,
+        name: "Woven Basket Set",
+        type: "decor",
+        description: "Organize your home in style with this set of woven baskets.",
+        image: "images/baskets.jpg",
+        price: 39.99,
+      },
+      {
+        id: 4,
+        name: "Abstract Wall Art",
+        type: "decor",
+        description: "Make a statement with this unique piece of abstract wall art.",
+        image: "images/wall-art.jpg",
+        price: 99.99,
+      },
+    ];
+
+    function showProducts(type) {
+      const productContainer = document.getElementById("products");
+      productContainer.innerHTML = ""; // Clear previous content
+
+      let filteredProducts = products;
+      if (type !== "all") {
+        filteredProducts = products.filter((product) => product.type === type);
+      }
+
+      filteredProducts.forEach((product) => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("product");
+
+        const productImage = document.createElement("img");
+        productImage.src = product.image;
+        **productImage.alt = `${product.name} - ${product.description.slice(0, 30)}...`;**  // Added alt text
+        productCard.appendChild(productImage);
+
+        const productName = document.createElement("h3");
+        productName.textContent = product.name;
+        productCard.appendChild(productName);
+
+        const productDescription = document.createElement("p");
+        productDescription.textContent = product.description;
+        productCard.appendChild(productDescription);
+
+        const productPrice = document.createElement("span");
+        productPrice.textContent = `$${product.price.toFixed(2)}`;
+        productCard.appendChild(productPrice);
+
+        productContainer.appendChild(productCard);
+      });
+    }
+
+    showProducts("all"); // Display all products on page load
+  </script>
+</body>
+</html>
